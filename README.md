@@ -1,1 +1,1 @@
-# Syntactic-Constructor-of-Polish-Sentences
+# Syntactic-Constructor-of-English-Sentences
