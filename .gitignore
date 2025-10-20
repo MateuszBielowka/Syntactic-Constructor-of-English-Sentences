@@ -1,3 +1,21 @@
+# PyCharm / IntelliJ
+.idea/
+*.iml
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+.env/
+.env*/ 
+.venv*/
+
+# System files
+.DS_Store
+Thumbs.db
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
