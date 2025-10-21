@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constructor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.css">
+{#    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">#}
+</head>
+<body>
+<h1>Constructor</h1>
+
+<form id="noun_form">
+  <label for="noun_dropdown">Wybierz rzeczownik:</label>
+  <select name="cars" id="noun_dropdown">
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+
+<p>Czy chcesz użyć przymiotnika?</p>
+<label id="adjective_inquiry">
+    <input type="checkbox">
+</label>
+<form id="adjective_form">
+  <label for="adjective_dropdown">Wybierz przymiotnik:</label>
+  <select name="cars" id="adjective_dropdown">
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+
+<form id="verb_form">
+  <label for="verb_dropdown">Wybierz czasownik:</label>
+  <select name="cars" id="verb_dropdown">
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+
+<p>Czy chcesz użyć zaimka dzierżawczego lub wskazującego?</p>
+<label id="pronoun_inquiry">
+    <input type="checkbox">
+</label>
+<form id="pronoun_form">
+  <label for="pronoun_dropdown">Wybierz zaimek:</label>
+  <select name="cars" id="pronoun_dropdown">
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+
+<form id="tense_form">
+  <label for="tense_dropdown">Wybierz czas:</label>
+  <select name="cars" id="tense_dropdown">
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+
+<form id="sentence_kind_form">
+  <label for="sentence_kind_dropdown">Wybierz czas:</label>
+  <select name="cars" id="sentence_kind_dropdown">
+  </select>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+
+<script>
+    async function readJSON(appRoute, query) {
+        const response = await fetch(appRoute);
+        const data = await response.json();
+
+        const select = document.querySelector(query);
+        select.innerHTML = "";
+
+        data.forEach(word => {
+            const option = document.createElement("option");
+            option.innerHTML = `<option>${word}</option>`;
+            select.appendChild(option);
+        });
+    }
+
+    readJSON("/api/noun_list", "#noun_form select");
+    readJSON("/api/verb_list", "#verb_form select");
+    readJSON("/api/pronoun_list", "#pronoun_form select");
+    readJSON("/api/adjective_list", "#adjective_form select");
+    readJSON("/api/tense_list", "#tense_form select");
+    readJSON("/api/sentence_kind_list", "#sentence_kind_form select");
+
+</script>
+</body>
+</html>
