@@ -1,0 +1,44 @@
+main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+div {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #d5d5d5;
+
+    min-height: 100px;
+    min-width: 200px;
+}
+
+form {
+    padding: 10px;
+}
+
+.dropdown_button {
+    border: 3px solid green;
+    border-radius: 5px;
+    background-color: chartreuse;
+
+    font-family: "Lucinda Grande", "Lucinda Sans Unicode", Helvetica, sans-serif;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+}
+
+#adjective_form,
+#pronoun_form{
+    display: none;
+}
+
+div#adj #toggle_adj:checked ~ #adjective_form {
+    background-color: hotpink;
+    display: block;
+}
+
+div#pro #toggle_pro:checked ~ #pronoun_form {
+    background-color: hotpink;
+    display: block;
+}
