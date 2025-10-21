@@ -18,55 +18,73 @@
 <h1>Constructor</h1>
 
 <main id="wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-2">
-                Osoba
-            </div>
-            <div class="col-5">
-                Liczba pojedyncza
-            </div>
-            <div class="col-5">
-                Liczba mnoga
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-2">
-                1
+    <form class="container">
+            <div class="row">
+                <div class="col-2">
+                    Osoba
+                </div>
+                <div class="col-5">
+                    Liczba pojedyncza
+                </div>
+                <div class="col-5">
+                    Liczba mnoga
+                </div>
             </div>
-            <div class="col-5">
-                I
-            </div>
-            <div class="col-5">
-                we
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-2">
-                2
+            <div class="row">
+                <div class="col-2">
+                    1
+                </div>
+                <div class="col-5">
+                    <input type="radio" id="i" name="person" value="i">
+                    <label for="i" class="dropdown_button">I</label>
+                </div>
+                <div class="col-5">
+                    <input type="radio" id="we" name="person" value="we">
+                    <label for="we" class="dropdown_button">we</label>
+                </div>
             </div>
-            <div class="col-5">
-                you
-            </div>
-            <div class="col-5">
-                you
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-2">
-                3
+            <div class="row">
+                <div class="col-2">
+                    2
+                </div>
+                <div class="col-5">
+                    <input type="radio" id="thou" name="person" value="thou">
+                    <label for="thou" class="dropdown_button">you</label>
+                </div>
+                <div class="col-5">
+                    <input type="radio" id="you" name="person" value="you">
+                    <label for="you" class="dropdown_button">you</label>
+                </div>
             </div>
-            <div class="col-5">
-                X
+
+            <div class="row">
+                <div class="col-2">
+                    3
+                </div>
+                <div class="col-5" id="third_person">
+
+                    <input type="radio" id="toggle_person" name="person">
+                    <label for="toggle_person" class="dropdown_button">he / she / they</label>
+                    <div id="person_form">
+                        <label for="person_dropdown">Wybierz osobe:</label>
+                        <select name="person" id="person_dropdown">
+                            <option value="he">he</option>
+                        <option value="she">she</option>
+                        <option value="they">they</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="col-5">
+                    <input type="radio" id="they" name="person" value="they">
+                    <label for="they" class="dropdown_button">they</label>
+                </div>
             </div>
-            <div class="col-5">
-                they
-            </div>
-        </div>
-    </div>
+        <input type="submit" value="Submit">
+    </form>
 
     {#RZECZOWNIK#}
     <div id="noun">
@@ -110,7 +128,7 @@
         </form>
     </div>
 
-    {#ZAIMEK#}
+    {#CZAS#}
     <div id="ten">
         <form id="tense_form">
             <label for="tense_dropdown">Wybierz czas:</label>
@@ -122,7 +140,7 @@
     {#RODZAJ_ZDANIA#}
     <div id="sek">
         <form id="sentence_kind_form">
-            <label for="sentence_kind_dropdown">Wybierz czas:</label>
+            <label for="sentence_kind_dropdown">Wybierz rodzaj zdania:</label>
             <select name="cars" id="sentence_kind_dropdown"></select>
             <input type="submit" value="Submit">
         </form>
@@ -149,7 +167,6 @@
     }
 
 
-
     readJSON("/api/noun_list", "#noun_form select");
     readJSON("/api/verb_list", "#verb_form select");
     readJSON("/api/pronoun_list", "#pronoun_form select");
@@ -160,34 +177,34 @@
 </script>
 
 
-    <script>
-        function sendData() {
-            var text = "";
-            var dict = {}
-            listOfForms = ["noun_dropdown", "adjective_dropdown", "verb_dropdown", "pronoun_dropdown", "tense_dropdown", "sentence_kind_dropdown"];
-            for (index in listOfForms) {
+<script>
+    function sendData() {
+        var text = "";
+        var dict = {}
+        listOfForms = ["noun_dropdown", "adjective_dropdown", "verb_dropdown", "pronoun_dropdown", "tense_dropdown", "sentence_kind_dropdown"];
+        for (index in listOfForms) {
 
-                var e = document.getElementById(listOfForms[index]);
-                text += e.options[e.selectedIndex].text;
-                dict[listOfForms[index]] = e.options[e.selectedIndex].text;
+            var e = document.getElementById(listOfForms[index]);
+            text += e.options[e.selectedIndex].text;
+            dict[listOfForms[index]] = e.options[e.selectedIndex].text;
 
-            }
-
-            $.ajax({
-                url: '/process',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(dict),
-                success: function(response) {
-                    document.getElementById('output').innerHTML = JSON.stringify(response, null, 2); //jeśli to jest dict
-                    // document.getElementById('output').innerHTML = (response.result); jeśli to jest pojedyncze pole ze stringiem
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
         }
 
-    </script>
+        $.ajax({
+            url: '/process',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(dict),
+            success: function (response) {
+                document.getElementById('output').innerHTML = JSON.stringify(response, null, 2); //jeśli to jest dict
+                // document.getElementById('output').innerHTML = (response.result); jeśli to jest pojedyncze pole ze stringiem
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+</script>
 </body>
 </html>

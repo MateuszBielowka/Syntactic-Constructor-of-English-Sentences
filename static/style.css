@@ -28,8 +28,14 @@ form {
     margin: 10px;
 }
 
+.dropdown_button:hover,
+select:hover {
+    cursor: pointer;
+}
+
 #adjective_form,
-#pronoun_form{
+#pronoun_form,
+#person_form {
     display: none;
 }
 
@@ -41,4 +47,13 @@ div#adj #toggle_adj:checked ~ #adjective_form {
 div#pro #toggle_pro:checked ~ #pronoun_form {
     background-color: hotpink;
     display: block;
+}
+
+div#third_person #toggle_person:checked ~ #person_form {
+    background-color: hotpink;
+    display: block;
+}
+
+input[type=checkbox] {
+  opacity: 0;
 }
