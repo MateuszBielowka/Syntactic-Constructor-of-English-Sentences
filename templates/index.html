@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
             crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 <h1>Constructor</h1>
@@ -129,6 +130,9 @@
 </main>
 
 
+<button onclick="sendData()">Send Data</button>
+<div id="output"></div>
+
 <script>
     async function readJSON(appRoute, query) {
         const response = await fetch(appRoute);
@@ -144,6 +148,8 @@
         });
     }
 
+
+
     readJSON("/api/noun_list", "#noun_form select");
     readJSON("/api/verb_list", "#verb_form select");
     readJSON("/api/pronoun_list", "#pronoun_form select");
@@ -152,5 +158,36 @@
     readJSON("/api/sentence_kind_list", "#sentence_kind_form select");
 
 </script>
+
+
+    <script>
+        function sendData() {
+            var text = "";
+            var dict = {}
+            listOfForms = ["noun_dropdown", "adjective_dropdown", "verb_dropdown", "pronoun_dropdown", "tense_dropdown", "sentence_kind_dropdown"];
+            for (index in listOfForms) {
+
+                var e = document.getElementById(listOfForms[index]);
+                text += e.options[e.selectedIndex].text;
+                dict[listOfForms[index]] = e.options[e.selectedIndex].text;
+
+            }
+
+            $.ajax({
+                url: '/process',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(dict),
+                success: function(response) {
+                    document.getElementById('output').innerHTML = JSON.stringify(response, null, 2); //jeśli to jest dict
+                    // document.getElementById('output').innerHTML = (response.result); jeśli to jest pojedyncze pole ze stringiem
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+    </script>
 </body>
 </html>

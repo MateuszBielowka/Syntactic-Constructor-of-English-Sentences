@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, send_from_directory
+from flask import Flask, render_template, jsonify, send_from_directory, request
 from pathlib import Path
 import json
 
@@ -32,6 +32,18 @@ def jsonify_tenses():
 @app.route("/api/sentence_kind_list")
 def jsonify_sentence_kinds():
     return jsonify(json.loads((RESULTS_PATH / "english_sentence_kinds.json").read_text()))
+
+@app.route('/process', methods=['POST'])
+def process():
+    data = request.get_json()
+    # do usuniecia
+    for key in data:
+        data[key] = data[key][0]
+    result = data
+    print(result)
+    # koniec testu
+    #TODO wywołanie funkcji zmieniającej data w poprawne zdanie (zwracamy string result)
+    return jsonify(result)
 
 
 if __name__ == "__main__":
