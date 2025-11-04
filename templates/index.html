@@ -256,19 +256,15 @@
 
 <script>
     function sendData() {
-        var text = "";
-        var dict = {}
-        listOfForms = ["verb_dropdown", "tense_dropdown", "sentence_kind_dropdown", "object_dropdown"];
-        for (index in listOfForms) {
-            var e = document.getElementById(listOfForms[index]);
-            text += e.options[e.selectedIndex].text;
-            dict[listOfForms[index]] = e.options[e.selectedIndex].text;
-        }
-
-        // add computed subject (either chosen pronoun/person or the selected noun)
-        dict['subject_dropdown'] = getSubjectValue();
-        dict['adj_dropdown'] = getAdjectiveValue();
-        dict['pronoun_dropdown'] = getPronounValue();
+        const dict = {
+            subject: getSubjectValue(),
+            verb: document.getElementById('verb_dropdown').value,
+            object: document.getElementById('object_dropdown').value,
+            tense: document.getElementById('tense_dropdown').value,
+            sentence_kind: document.getElementById('sentence_kind_dropdown').value,
+            adjective: getAdjectiveValue(),
+            pronoun: getPronounValue()
+        };
 
         $.ajax({
             url: '/process',
@@ -276,11 +272,15 @@
             contentType: 'application/json',
             data: JSON.stringify(dict),
             success: function (response) {
-                document.getElementById('output').innerHTML = JSON.stringify(response, null, 2); //jeśli to jest dict
-                // document.getElementById('output').innerHTML = (response.result); jeśli to jest pojedyncze pole ze stringiem
+                if (response.result) {
+                    document.getElementById('output').textContent = response.result;
+                } else {
+                    document.getElementById('output').textContent = JSON.stringify(response, null, 2);
+                }
             },
             error: function (error) {
                 console.log(error);
+                alert("Nie udało się wysłać danych. Sprawdź konsolę.");
             }
         });
     }
