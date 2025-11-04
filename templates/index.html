@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Constructor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.12/codemirror.min.css">
-    {#    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">#}
+    {#
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">#}
     <link rel="stylesheet" href="../static/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
@@ -13,13 +15,37 @@
             integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
             crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/scripts.js"></script>
+    <style>
+        /* Make the toggle label behave as a block that fills its column */
+        #third_person label[for="toggle_person"] {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Ensure the person select fills the column width and uses border-box sizing */
+        #person_form select, #noun_form select, #object_form select {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Small spacing so select doesn't stick to the label above it */
+        #person_form {
+            margin-top: 6px;
+        }
+    </style>
 </head>
+
 <body>
-<h1>Constructor</h1>
+<h1>Konstruktor angielskich zdań</h1>
 
 <main id="wrapper">
 
-    <form class="container">
+    {#OSOBA I LICZBA#}
+    <section id="subject_section">
+        <h2>Wybierz podmiot</h2>
+        <form class="container" id="subject_form">
             <div class="row">
                 <div class="col-2">
                     Osoba
@@ -37,12 +63,12 @@
                     1
                 </div>
                 <div class="col-5">
-                    <input type="radio" id="i" name="person" value="i">
-                    <label for="i" class="dropdown_button">I</label>
+                    <input type="radio" id="i" name="noun" value="i" class="radio-form">
+                    <label for="i" class="btn-primary" id="first">I</label>
                 </div>
                 <div class="col-5">
-                    <input type="radio" id="we" name="person" value="we">
-                    <label for="we" class="dropdown_button">we</label>
+                    <input type="radio" id="we" name="noun" value="we" class="radio-form">
+                    <label for="we" class="btn-primary">we</label>
                 </div>
             </div>
 
@@ -51,12 +77,12 @@
                     2
                 </div>
                 <div class="col-5">
-                    <input type="radio" id="thou" name="person" value="thou">
-                    <label for="thou" class="dropdown_button">you</label>
+                    <input type="radio" id="thou" name="noun" value="you" class="radio-form">
+                    <label for="thou" class="btn-primary">you</label>
                 </div>
                 <div class="col-5">
-                    <input type="radio" id="you" name="person" value="you">
-                    <label for="you" class="dropdown_button">you</label>
+                    <input type="radio" id="you" name="noun" value="you" class="radio-form">
+                    <label for="you" class="btn-primary">you</label>
                 </div>
             </div>
 
@@ -66,90 +92,111 @@
                 </div>
                 <div class="col-5" id="third_person">
 
-                    <input type="radio" id="toggle_person" name="person">
-                    <label for="toggle_person" class="dropdown_button">he / she / they</label>
+                    <input type="radio" id="toggle_person" name="noun" value="he" class="radio-form">
+                    <label for="toggle_person" class="btn-primary">he / she / they</label>
                     <div id="person_form">
-                        <label for="person_dropdown">Wybierz osobe:</label>
+                        <label for="person_dropdown" class="btn-secondary"></label>
                         <select name="person" id="person_dropdown">
                             <option value="he">he</option>
-                        <option value="she">she</option>
-                        <option value="they">they</option>
+                            <option value="she">she</option>
+                            <option value="they">they</option>
                         </select>
-
                     </div>
                 </div>
                 <div class="col-5">
-                    <input type="radio" id="they" name="person" value="they">
-                    <label for="they" class="dropdown_button">they</label>
+                    <input type="radio" id="they" name="noun" value="they" class="radio-form">
+                    <label for="they" class="btn-primary">they</label>
                 </div>
             </div>
-        <input type="submit" value="Submit">
-    </form>
-
-    {#RZECZOWNIK#}
-    <div id="noun">
-        <form id="noun_form">
-            <label for="noun_dropdown">Wybierz rzeczownik:</label>
-            <select name="cars" id="noun_dropdown"></select>
+            <div class="row">
+                {#RZECZOWNIK#}
+                <div class="col-2">Rzeczownik</div>
+                <div class="col-10" id="noun">
+                    <input type="radio" id="toggle_noun" name="noun" value="noun" class="radio-form">
+                    <label for="toggle_noun" class="btn-primary">Rzeczownik</label>
+                    <div id="noun_form">
+                        <label for="noun_dropdown"></label>
+                        <select name="noun" id="noun_dropdown"></select>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" id="subject_value" name="subject">
             <input type="submit" value="Submit">
         </form>
-    </div>
+    </section>
 
-
-    {#PRZYMIOTNIK#}
-    <div id="adj">
-        <label for="toggle_adj" class="dropdown_button">Użyj przymiotnika</label>
-        <input id="toggle_adj" type="checkbox">
-        <form id="adjective_form">
-            <label for="adjective_dropdown">Wybierz przymiotnik:</label>
-            <select name="adjectives" id="adjective_dropdown"></select>
-            <input type="submit" value="Submit">
-        </form>
-    </div>
 
     {#CZASOWNIK#}
-    <div id="verb">
+    <section id="verb_section">
         <form id="verb_form">
             <label for="verb_dropdown">Wybierz czasownik:</label>
             <select name="cars" id="verb_dropdown"></select>
             <input type="submit" value="Submit">
         </form>
-    </div>
-
+    </section>
 
     {#ZAIMEK#}
-    <div id="pro">
-        <label for="toggle_pro" class="dropdown_button">Użyj zaimka dzierżawczego lub wskazującego</label>
+    <section id="pronoun_section">
+        <label for="toggle_pro" class="btn-primary">Użyj zaimka dzierżawczego lub wskazującego</label>
         <input id="toggle_pro" type="checkbox">
         <form id="pronoun_form">
             <label for="pronoun_dropdown">Wybierz zaimek:</label>
             <select name="pronouns" id="pronoun_dropdown"></select>
             <input type="submit" value="Submit">
         </form>
-    </div>
+    </section>
+
+
+    {#PRZYMIOTNIK#}
+    <section id="adjective_section">
+        <label for="toggle_adj" class="btn-primary">Użyj przymiotnika</label>
+        <input id="toggle_adj" type="checkbox">
+        <form id="adjective_form">
+            <label for="adjective_dropdown">Wybierz przymiotnik:</label>
+            <select name="adjectives" id="adjective_dropdown"></select>
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+
+    {#DOPEŁNIENIE#}
+    <section id="object_section">
+        <form id="object_form">
+            <label for="object_dropdown">Wybierz dopełnienie:</label>
+            <select name="objects" id="object_dropdown"></select>
+            <input type="submit" value="Submit">
+        </form>
+    </section>
 
     {#CZAS#}
-    <div id="ten">
+    <section id="tense_section">
         <form id="tense_form">
             <label for="tense_dropdown">Wybierz czas:</label>
             <select name="cars" id="tense_dropdown"></select>
             <input type="submit" value="Submit">
         </form>
-    </div>
+    </section>
 
     {#RODZAJ_ZDANIA#}
-    <div id="sek">
+    <section id="sentence_kind_section">
         <form id="sentence_kind_form">
             <label for="sentence_kind_dropdown">Wybierz rodzaj zdania:</label>
             <select name="cars" id="sentence_kind_dropdown"></select>
             <input type="submit" value="Submit">
         </form>
-    </div>
+    </section>
+
+    <section id="sending_section">
+        <button onclick="sendData()" id="send_button">Send Data</button>
+    </section>
+
+    <section id="output_section">
+        <h2>Wygenerowane zdanie</h2>
+        <div id="output"></div>
+    </section>
 </main>
 
 
-<button onclick="sendData()">Send Data</button>
-<div id="output"></div>
+
 
 <script>
     async function readJSON(appRoute, query) {
@@ -166,29 +213,62 @@
         });
     }
 
-
     readJSON("/api/noun_list", "#noun_form select");
+    readJSON("/api/noun_list", "#object_form select");
     readJSON("/api/verb_list", "#verb_form select");
     readJSON("/api/pronoun_list", "#pronoun_form select");
     readJSON("/api/adjective_list", "#adjective_form select");
     readJSON("/api/tense_list", "#tense_form select");
     readJSON("/api/sentence_kind_list", "#sentence_kind_form select");
-
 </script>
+<script>
+    function getSubjectValue() {
+        // if "Rzeczownik" radio is selected -> return selected noun
+        const nounRadio = document.getElementById('toggle_noun');
+        if (nounRadio && nounRadio.checked) {
+            return document.getElementById('noun_dropdown').value || "";
+        }
 
+        // if the "he / she / they" radio is selected, use the person_dropdown selection
+        const checked = document.querySelector('input[name="noun"]:checked');
+        if (checked.id === 'toggle_person') {
+            return document.getElementById('person_dropdown').value || "";
+        }
+
+        // otherwise return the radio's value (i, you, we, they, etc.)
+        return checked.value || "";
+    }
+
+    function getAdjectiveValue() {
+        const adjCheckbox = document.getElementById('toggle_adj');
+        if (adjCheckbox && adjCheckbox.checked) {
+            return document.getElementById('adj_dropdown').value;
+        } else return "null";
+    }
+
+    function getPronounValue() {
+        const proCheckbox = document.getElementById('toggle_pro');
+        if (proCheckbox && proCheckbox.checked) {
+            return document.getElementById('pronoun_dropdown').value;
+        } else return "null";
+    }
+</script>
 
 <script>
     function sendData() {
         var text = "";
         var dict = {}
-        listOfForms = ["noun_dropdown", "adjective_dropdown", "verb_dropdown", "pronoun_dropdown", "tense_dropdown", "sentence_kind_dropdown"];
+        listOfForms = ["verb_dropdown", "tense_dropdown", "sentence_kind_dropdown", "object_dropdown"];
         for (index in listOfForms) {
-
             var e = document.getElementById(listOfForms[index]);
             text += e.options[e.selectedIndex].text;
             dict[listOfForms[index]] = e.options[e.selectedIndex].text;
-
         }
+
+        // add computed subject (either chosen pronoun/person or the selected noun)
+        dict['subject_dropdown'] = getSubjectValue();
+        dict['adj_dropdown'] = getAdjectiveValue();
+        dict['pronoun_dropdown'] = getPronounValue();
 
         $.ajax({
             url: '/process',
@@ -206,5 +286,25 @@
     }
 
 </script>
+<script>
+    // Make person_dropdown match the width and height of the toggle label area (fills the column)
+    function adjustPersonDropdownSize() {
+        const label = document.querySelector('#third_person label[for="toggle_person"]');
+        const select = document.getElementById('person_dropdown');
+        if (!label || !select) return;
+
+        // Width is handled by CSS (100%), but to match the label's height precisely set it via JS
+        const labelHeight = label.clientHeight;
+        if (labelHeight > 0) {
+            select.style.height = labelHeight + 'px';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        adjustPersonDropdownSize();
+        window.addEventListener('resize', adjustPersonDropdownSize);
+    });
+</script>
 </body>
+
 </html>

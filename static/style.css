@@ -1,59 +1,212 @@
-main {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+:root {
+    --btn-primary: #7FFF00FF;
+    --btn-primary-border: #019515;
+    --btn-primary-hover: #a3f85f;
+    --btn-primary-active: #d50098;
+    --btn-primary-checked: #ff56cd;
+    --btn-secondary: #3CC6FAFF;
+    --btn-secondary-border: #004080;
+    --btn-secondary-hover: #75d9fa;
+    --btn-secondary-active: #06afec;
+    --btn-secondary-checked: #b84cff;
 }
 
-div {
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: #d5d5d5;
+h1 {
+    text-align: center;
+    font-family: "Lucinda Grande", "Lucinda Sans Unicode", Helvetica, sans-serif;
+    font-size: 3rem;
+    padding: 5rem;
+}
 
-    min-height: 100px;
-    min-width: 200px;
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10rem;
+
+    font-family: "Courier New", Courier, monospace;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 65%;
+
+    text-align: center;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px #606060;
+    padding: 2rem;
 }
 
 form {
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-.dropdown_button {
-    border: 3px solid green;
+div {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+form div div label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    font-size: 1.5rem;
+}
+
+.btn-primary {
+    border: 2px solid #000000;
     border-radius: 5px;
-    background-color: chartreuse;
+    background-color: var(--btn-primary);
+    box-shadow: 3px 3px #000000;
 
     font-family: "Lucinda Grande", "Lucinda Sans Unicode", Helvetica, sans-serif;
     text-align: center;
+    font-size: 1.5rem;
     padding: 10px;
-    margin: 10px;
+
+    height: 100%;
+    width: 100%;
 }
 
-.dropdown_button:hover,
+.btn-primary:hover {
+    background-color: var(--btn-primary-hover);
+}
+
+.btn-primary:active {
+    background-color: var(--btn-primary-active);
+}
+
+.radio-form:checked ~ .btn-primary {
+    background-color: var(--btn-primary-checked);
+}
+
+
+select {
+    border: 2px solid #000000;
+    border-radius: 5px;
+    box-shadow: 3px 3px #000000;
+    background-color: var(--btn-secondary);
+    height: 100%;
+    width: 100%;
+
+    text-align: center;
+}
+
 select:hover {
+    background-color: var(--btn-secondary-hover);
+}
+
+select:active {
+    background-color: var(--btn-secondary-active);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover,
+select:hover,
+option:hover {
     cursor: pointer;
 }
 
-#adjective_form,
-#pronoun_form,
-#person_form {
+input[type=checkbox],
+input[type=submit],
+input[type=radio] {
     display: none;
 }
 
-div#adj #toggle_adj:checked ~ #adjective_form {
-    background-color: hotpink;
+/* ================== Toggle form displays ==================== */
+
+#adjective_form,
+#pronoun_form,
+#person_form,
+#noun_form {
+    display: none;
+}
+
+section#adjective_section #toggle_adj:checked ~ #adjective_form,
+section#pronoun_section #toggle_pro:checked ~ #pronoun_form,
+div#third_person #toggle_person:checked ~ #person_form,
+div#noun #toggle_noun:checked ~ #noun_form {
     display: block;
 }
 
-div#pro #toggle_pro:checked ~ #pronoun_form {
-    background-color: hotpink;
-    display: block;
+/* ================== Scrollbar ==================== */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
 }
 
-div#third_person #toggle_person:checked ~ #person_form {
-    background-color: hotpink;
-    display: block;
+/* Track */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
 }
 
-input[type=checkbox] {
-  opacity: 0;
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #c3c3c3;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #75d9fa;
+}
+
+/* ================== Container ==================== */
+.row {
+    min-height: 100px;
+}
+
+#third_person, #noun {
+    position: relative;
+    display: flex;
+}
+
+#person_form, #noun_form {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    margin: 0;
+}
+
+/* Make the toggle label behave as a block that fills its column */
+#third_person label[for="toggle_person"],
+#noun label[for="toggle_noun"] {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ================== Send data button ==================== */
+
+#sending_section {
+    padding: 0;
+    width: 300px;
+    height: 100px;
+    /*margin-bottom: 50px;*/
+}
+
+#send_button {
+    border: 2px solid #000000;
+    border-radius: 5px;
+    background-color: var(--btn-primary);
+    box-shadow: 3px 3px #000000;
+
+    width: 100%;
+    height: 100%;
+}
+
+/* ================== Output ==================== */
+
+#output_section {
+    /*display: none;*/
+    margin-bottom: 50px;
 }

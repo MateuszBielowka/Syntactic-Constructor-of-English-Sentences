@@ -36,6 +36,7 @@ def jsonify_sentence_kinds():
 @app.route('/process', methods=['POST'])
 def process():
     data = request.get_json()
+    print(data)
     # do usuniecia
     for key in data:
         data[key] = data[key][0]
