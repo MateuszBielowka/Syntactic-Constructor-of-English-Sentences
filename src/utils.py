@@ -30,7 +30,7 @@ def conjugate_to_be(person):
         "we": "are",
         "they": "are"
     }
-    return conjugation_table[person.lower()]
+    return conjugation_table.get(person.lower(), "is")
 
 
 def find_continuous_form(verb):
