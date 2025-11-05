@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify, send_from_directory, request
 from pathlib import Path
 import json
+from sentence_constructor import construct_sentence
 
 app = Flask(__name__)
 
@@ -41,6 +42,8 @@ def process():
     for key in data:
         data[key] = data[key][0]
     result = data
+
+    print(construct_sentence(data))
     print(result)
     # koniec testu
     #TODO wywołanie funkcji zmieniającej data w poprawne zdanie (zwracamy string result)
