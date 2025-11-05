@@ -99,7 +99,7 @@
                         <select name="person" id="person_dropdown">
                             <option value="he">he</option>
                             <option value="she">she</option>
-                            <option value="they">they</option>
+                            <option value="they">it</option>
                         </select>
                     </div>
                 </div>
@@ -229,7 +229,7 @@
             return document.getElementById('noun_dropdown').value || "";
         }
 
-        // if the "he / she / they" radio is selected, use the person_dropdown selection
+        // if the "he / she / it" radio is selected, use the person_dropdown selection
         const checked = document.querySelector('input[name="noun"]:checked');
         if (checked.id === 'toggle_person') {
             return document.getElementById('person_dropdown').value || "";
@@ -252,23 +252,33 @@
             return document.getElementById('pronoun_dropdown').value;
         } else return "null";
     }
+
+    function translateSentenceKind() {
+        const value = document.getElementById('sentence_kind_dropdown').value;
+
+        const translationMap = {
+            "Zdanie twierdz\u0105ce": "Affirmative Sentence",
+            "Zdanie pytaj\u0105ce": "Interrogative Sentence",
+            "Zdanie przecz\u0105ce": "Negative Sentence",
+            "Tryb rozkazuj\u0105cy": "Imperative Mood"
+        };
+
+        return translationMap[value] || value;
+    }
+
 </script>
 
 <script>
     function sendData() {
-        var text = "";
-        var dict = {}
-        listOfForms = ["verb_dropdown", "tense_dropdown", "sentence_kind_dropdown", "object_dropdown"];
-        for (index in listOfForms) {
-            var e = document.getElementById(listOfForms[index]);
-            text += e.options[e.selectedIndex].text;
-            dict[listOfForms[index]] = e.options[e.selectedIndex].text;
-        }
-
-        // add computed subject (either chosen pronoun/person or the selected noun)
-        dict['subject_dropdown'] = getSubjectValue();
-        dict['adjective_dropdown'] = getAdjectiveValue();
-        dict['pronoun_dropdown'] = getPronounValue();
+        const dict = {
+            subject: getSubjectValue(),
+            verb: document.getElementById('verb_dropdown').value,
+            object: document.getElementById('object_dropdown').value,
+            tense: document.getElementById('tense_dropdown').value,
+            sentence_kind: translateSentenceKind(),
+            adjective: getAdjectiveValue(),
+            pronoun: getPronounValue()
+        };
 
         $.ajax({
             url: '/process',
@@ -276,11 +286,15 @@
             contentType: 'application/json',
             data: JSON.stringify(dict),
             success: function (response) {
-                document.getElementById('output').innerHTML = JSON.stringify(response, null, 2); //jeśli to jest dict
-                // document.getElementById('output').innerHTML = (response.result); jeśli to jest pojedyncze pole ze stringiem
+                if (response.result) {
+                    document.getElementById('output').textContent = response.result;
+                } else {
+                    document.getElementById('output').textContent = JSON.stringify(response, null, 2);
+                }
             },
             error: function (error) {
                 console.log(error);
+                alert("Nie udało się wysłać danych. Sprawdź konsolę.");
             }
         });
     }

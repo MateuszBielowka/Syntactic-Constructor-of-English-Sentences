@@ -1,8 +1,7 @@
 from flask import Flask, render_template, jsonify, send_from_directory, request
 from pathlib import Path
 import json
-
-from src.utils import construct_sentence
+from sentence_constructor import construct_sentence
 
 app = Flask(__name__)
 
@@ -39,17 +38,8 @@ def jsonify_sentence_kinds():
 def process():
     data = request.get_json()
     print(data)
-    result = construct_sentence(data['subject_dropdown'], False, data['object_dropdown'], data['verb_dropdown'],
-                       data['adjective_dropdown'], data['pronoun_dropdown'], data['tense_dropdown'],
-                       data['sentence_kind_dropdown'])
+    result = construct_sentence(data)
     print(result)
-    # do usuniecia
-    # for key in data:
-    #     data[key] = data[key][0]
-    # result = data
-    # print(result)
-    # koniec testu
-    #TODO wywołanie funkcji zmieniającej data w poprawne zdanie (zwracamy string result)
     return jsonify(result)
 
 
