@@ -1,15 +1,25 @@
+from src.utils import conjugate_to_be, standard_construction, find_past_simple_form, find_continuous_form
+
 
 def construct_future_simple(sentence_kind, subject, verb, object_phrase):
-    return ""
+    auxiliary = "will"
+    return standard_construction(sentence_kind, subject, verb, object_phrase, auxiliary)
+
 
 
 def construct_future_continuous(sentence_kind, subject, verb, object_phrase):
-    return ""
+    verb = "be " + find_continuous_form(verb)
+    auxiliary = "will"
+    return standard_construction(sentence_kind, subject, verb, object_phrase, auxiliary)
 
 
 def construct_future_perfect(sentence_kind, subject, verb, object_phrase):
-    return ""
+    verb = "have " + find_past_simple_form(verb)
+    auxiliary = "will"
+    return standard_construction(sentence_kind, subject, verb, object_phrase, auxiliary)
 
 
 def construct_future_perfect_continuous(sentence_kind, subject, verb, object_phrase):
-    return ""
+    verb = "heve been " + find_continuous_form(verb)
+    auxiliary = "will"
+    return standard_construction(sentence_kind, subject, verb, object_phrase, auxiliary)

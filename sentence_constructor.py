@@ -55,6 +55,7 @@ def construct_sentence(sentence):
     constructor = TENSE_FUNCTIONS.get(tense)
 
     if constructor:
-        return constructor(sentence_kind, subject, verb, object_phrase)
+        sentence = constructor(sentence_kind, subject, verb, object_phrase)
+        return sentence.capitalize().replace("i ", "I ")
     else:
         return "Unsupported tense: " + str(tense)
