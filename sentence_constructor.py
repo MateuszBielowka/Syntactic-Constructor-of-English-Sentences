@@ -48,7 +48,7 @@ def construct_sentence(sentence):
     pronoun = sentence['pronoun']
 
     if adjective != 'null':
-        object_phrase = object_phrase + ' ' + adjective
+        object_phrase = adjective + ' ' + object_phrase
     if pronoun != 'null':
         object_phrase = pronoun + ' ' + object_phrase
 
