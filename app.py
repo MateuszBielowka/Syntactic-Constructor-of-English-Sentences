@@ -38,15 +38,8 @@ def jsonify_sentence_kinds():
 def process():
     data = request.get_json()
     print(data)
-    # do usuniecia
-    for key in data:
-        data[key] = data[key][0]
-    result = data
-
-    print(construct_sentence(data))
+    result = construct_sentence(data)
     print(result)
-    # koniec testu
-    #TODO wywołanie funkcji zmieniającej data w poprawne zdanie (zwracamy string result)
     return jsonify(result)
 
 

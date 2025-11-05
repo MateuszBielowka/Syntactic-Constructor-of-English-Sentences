@@ -47,9 +47,9 @@ def construct_sentence(sentence):
     adjective = sentence['adjective']
     pronoun = sentence['pronoun']
 
-    if adjective is not 'null':
+    if adjective != 'null':
         object_phrase = object_phrase + ' ' + adjective
-    if pronoun is not 'null':
+    if pronoun != 'null':
         object_phrase = pronoun + ' ' + object_phrase
 
     constructor = TENSE_FUNCTIONS.get(tense)

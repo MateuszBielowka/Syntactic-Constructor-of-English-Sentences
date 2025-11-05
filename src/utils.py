@@ -28,6 +28,8 @@ def standard_construction(sentence_kind, subject, verb, object_phrase, auxiliary
         return subject + " " + auxiliary + " " + verb + " " + object_phrase
     elif sentence_kind == "Negative Sentence":
         return subject + " " + auxiliary + " not " + verb + " " + object_phrase
+    else:
+        return "Unknown sentence kind: " + sentence_kind
 
 
 def find_past_participle_form(verb):

@@ -17,6 +17,8 @@ def construct_present_simple(sentence_kind, subject, verb, object_phrase):
             result = auxiliary + " " + subject + " " + verb + " " + object_phrase
         elif sentence_kind == "Negative Sentence":
             result = subject + " " + auxiliary + " not " + verb + " " + object_phrase
+        else:
+            result = "Unknown sentence kind: " + sentence_kind
     return result
 
 

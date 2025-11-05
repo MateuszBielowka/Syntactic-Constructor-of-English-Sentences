@@ -99,7 +99,7 @@
                         <select name="person" id="person_dropdown">
                             <option value="he">he</option>
                             <option value="she">she</option>
-                            <option value="they">they</option>
+                            <option value="they">it</option>
                         </select>
                     </div>
                 </div>
@@ -229,7 +229,7 @@
             return document.getElementById('noun_dropdown').value || "";
         }
 
-        // if the "he / she / they" radio is selected, use the person_dropdown selection
+        // if the "he / she / it" radio is selected, use the person_dropdown selection
         const checked = document.querySelector('input[name="noun"]:checked');
         if (checked.id === 'toggle_person') {
             return document.getElementById('person_dropdown').value || "";
@@ -252,6 +252,20 @@
             return document.getElementById('pronoun_dropdown').value;
         } else return "null";
     }
+
+    function translateSentenceKind() {
+        const value = document.getElementById('sentence_kind_dropdown').value;
+
+        const translationMap = {
+            "Zdanie twierdz\u0105ce": "Affirmative Sentence",
+            "Zdanie pytaj\u0105ce": "Interrogative Sentence",
+            "Zdanie przecz\u0105ce": "Negative Sentence",
+            "Tryb rozkazuj\u0105cy": "Imperative Mood"
+        };
+
+        return translationMap[value] || value;
+    }
+
 </script>
 
 <script>
@@ -261,7 +275,7 @@
             verb: document.getElementById('verb_dropdown').value,
             object: document.getElementById('object_dropdown').value,
             tense: document.getElementById('tense_dropdown').value,
-            sentence_kind: document.getElementById('sentence_kind_dropdown').value,
+            sentence_kind: translateSentenceKind(),
             adjective: getAdjectiveValue(),
             pronoun: getPronounValue()
         };
