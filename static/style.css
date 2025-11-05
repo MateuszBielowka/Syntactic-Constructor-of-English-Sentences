@@ -1,13 +1,13 @@
 :root {
-    --btn-primary: #7FFF00FF;
-    --btn-primary-border: #019515;
-    --btn-primary-hover: #a3f85f;
-    --btn-primary-active: #d50098;
-    --btn-primary-checked: #ff56cd;
-    --btn-secondary: #3CC6FAFF;
+    --btn-primary: #aebfd2;
+    --btn-primary-border: #323a47;
+    --btn-primary-hover:  #bbcdd7;
+    --btn-primary-active: #4b3f44;
+    --btn-primary-checked:  #6b6a6d;
+    --btn-secondary: #8195ae;
     --btn-secondary-border: #004080;
-    --btn-secondary-hover: #75d9fa;
-    --btn-secondary-active: #06afec;
+    --btn-secondary-hover: #8195ae;
+    --btn-secondary-active:  #878e92;
     --btn-secondary-checked: #b84cff;
 }
 
@@ -23,7 +23,7 @@ main {
     flex-direction: column;
     align-items: center;
     gap: 10rem;
-
+    background-color: #bbcdd7;
     font-family: "Courier New", Courier, monospace;
 }
 
@@ -34,7 +34,7 @@ section {
     width: 65%;
 
     text-align: center;
-    background-color: #f1f1f1;
+    background-color: #ddd4c3;
     border-radius: 10px;
     box-shadow: 5px 5px 10px #606060;
     padding: 2rem;
@@ -157,7 +157,7 @@ div#noun #toggle_noun:checked ~ #noun_form {
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #75d9fa;
+    background: #323a47;
 }
 
 /* ================== Container ==================== */
