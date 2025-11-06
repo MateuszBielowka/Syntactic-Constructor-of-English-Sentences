@@ -1,5 +1,6 @@
 import json
 import os
+from pathlib import Path
 
 
 def convert_csv_to_json(filepath):
@@ -46,16 +47,20 @@ def find_continuous_form(verb):
 
 
 def find_past_simple_form(verb):
-    with open('irregular_verbs.json') as json_file:
+    current_dir = Path(__file__).resolve().parent.parent
+    json_path = current_dir / 'data' / 'irregular_verbs.json'
+
+    with open(json_path) as json_file:
         irregular_verbs = json.load(json_file)
 
-    print("\n2nd form:", irregular_verbs[verb][0][0])
-    return "TODO"
+    return irregular_verbs[verb][0][0]
 
 
 def find_past_participle_form(verb):
-    with open('irregular_verbs.json') as json_file:
+    current_dir = Path(__file__).resolve().parent.parent
+    json_path = current_dir / 'data' / 'irregular_verbs.json'
+
+    with open(json_path) as json_file:
         irregular_verbs = json.load(json_file)
 
-    print("\n3nd form:", irregular_verbs[verb][0][1])
-    return "TODO"
+    return irregular_verbs[verb][0][1]
