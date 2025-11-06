@@ -1,4 +1,5 @@
 import json
+import os
 
 
 def convert_csv_to_json(filepath):
@@ -20,7 +21,7 @@ def standard_construction(sentence_kind, subject, verb, object_phrase, auxiliary
         return "Unknown sentence kind: " + sentence_kind
 
 
-def conjugate_to_be(person):
+def conjugate_to_be(person, plural):
     conjugation_table = {
         "i": "am",
         "you": "are",
@@ -30,7 +31,10 @@ def conjugate_to_be(person):
         "we": "are",
         "they": "are"
     }
-    return conjugation_table.get(person.lower(), "is")
+    if plural:
+        conjugate_noun = "are"
+    else: conjugate_noun = "is"
+    return conjugation_table.get(person.lower(), conjugate_noun)
 
 
 def find_continuous_form(verb):
@@ -42,10 +46,16 @@ def find_continuous_form(verb):
 
 
 def find_past_simple_form(verb):
-    # TODO: write this function so it imports something and returns a correct form
+    with open('irregular_verbs.json') as json_file:
+        irregular_verbs = json.load(json_file)
+
+    print("\n2nd form:", irregular_verbs[verb][0][0])
     return "TODO"
 
 
 def find_past_participle_form(verb):
-    # TODO: write this function so it imports something and returns a correct form
+    with open('irregular_verbs.json') as json_file:
+        irregular_verbs = json.load(json_file)
+
+    print("\n3nd form:", irregular_verbs[verb][0][1])
     return "TODO"

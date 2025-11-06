@@ -1,8 +1,6 @@
+import json
 import os
 
-from src.utils import (
-    convert_csv_to_json
-)
 from present_tenses_construction import(
     construct_present_simple,
     construct_present_continuous,
@@ -40,12 +38,28 @@ TENSE_FUNCTIONS = {
 
 def construct_sentence(sentence):
     subject = sentence['subject']
+    plural_subject = True if sentence['plural_subject'] == 'true' else False
     verb = sentence['verb']
     object_phrase = sentence['object']
+    plural_object = True if sentence['plural_object'] == 'true' else False
     tense = sentence['tense']
     sentence_kind = sentence['sentence_kind']
     adjective = sentence['adjective']
     pronoun = sentence['pronoun']
+
+    if plural_subject:
+        if subject[-1] in ['o', 's', 'h']:
+            subject = subject + 'e'
+        elif subject[-1] == 'y':
+            subject = subject[:-1] + 'ie'
+        subject = subject + 's'
+
+    if plural_object:
+        if object_phrase[-1] in ['o', 's', 'h']:
+            object_phrase = object_phrase + 'e'
+        elif object_phrase[-1] == 'y':
+            object_phrase = object_phrase[:-1] + 'ie'
+        object_phrase = object_phrase + 's'
 
     if adjective != 'null':
         object_phrase = adjective + ' ' + object_phrase
@@ -55,7 +69,7 @@ def construct_sentence(sentence):
     constructor = TENSE_FUNCTIONS.get(tense)
 
     if constructor:
-        sentence = constructor(sentence_kind, subject, verb, object_phrase)
+        sentence = constructor(sentence_kind, subject, plural_subject, verb, object_phrase)
         return sentence.capitalize().replace("i ", "I ")
     else:
         return "Unsupported tense: " + str(tense)

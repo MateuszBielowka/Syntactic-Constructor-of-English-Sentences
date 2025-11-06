@@ -15,7 +15,8 @@ h1 {
     text-align: center;
     font-family: "Lucinda Grande", "Lucinda Sans Unicode", Helvetica, sans-serif;
     font-size: 3rem;
-    padding: 5rem;
+    padding-top: 5rem;
+    background-color: #bbcdd7;
 }
 
 main {
@@ -52,6 +53,10 @@ div {
     text-align: center;
 }
 
+.header {
+    align-self: center;
+}
+
 form div div label {
     display: flex;
     justify-content: center;
@@ -75,6 +80,9 @@ label {
 
     height: 100%;
     width: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
 }
 
 .btn-primary:hover {
@@ -89,15 +97,15 @@ label {
     background-color: var(--btn-primary-checked);
 }
 
+input[type=checkbox]:checked + label {
+    background-color: var(--btn-primary-active);
+}
 
 select {
     border: 2px solid #000000;
     border-radius: 5px;
     box-shadow: 3px 3px #000000;
     background-color: var(--btn-secondary);
-    height: 100%;
-    width: 100%;
-
     text-align: center;
 }
 
@@ -116,10 +124,34 @@ option:hover {
     cursor: pointer;
 }
 
-input[type=checkbox],
 input[type=submit],
-input[type=radio] {
+input[type=radio],
+input[type=checkbox] {
     display: none;
+}
+
+.liczba_mnoga {
+    position: relative;
+}
+
+input#toggle_plural_object[type=checkbox],
+input#toggle_plural_subject[type=checkbox] {
+    display: block;
+    position: absolute;
+    right: 25%;
+    top: 45%;
+}
+
+#noun, #third_person {
+    position: relative;
+}
+
+#noun_dropdown, #person_dropdown {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    width: 95%;
+    height: 100%;
 }
 
 /* ================== Toggle form displays ==================== */
@@ -165,17 +197,17 @@ div#noun #toggle_noun:checked ~ #noun_form {
     min-height: 100px;
 }
 
-#third_person, #noun {
-    position: relative;
-    display: flex;
+#person_form {
+    width: 100%;
+    height: 100%;
 }
 
-#person_form, #noun_form {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    margin: 0;
-}
+/*#person_form, #noun_form {*/
+/*    position: absolute;*/
+/*    z-index: 1;*/
+/*    width: 100%;*/
+/*    margin: 0;*/
+/*}*/
 
 /* Make the toggle label behave as a block that fills its column */
 #third_person label[for="toggle_person"],
