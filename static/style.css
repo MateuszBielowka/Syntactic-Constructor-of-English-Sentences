@@ -1,13 +1,13 @@
 :root {
     --btn-primary: #aebfd2;
     --btn-primary-border: #323a47;
-    --btn-primary-hover:  #bbcdd7;
+    --btn-primary-hover: #bbcdd7;
     --btn-primary-active: #4b3f44;
-    --btn-primary-checked:  #6b6a6d;
+    --btn-primary-checked: #6b6a6d;
     --btn-secondary: #8195ae;
     --btn-secondary-border: #004080;
     --btn-secondary-hover: #8195ae;
-    --btn-secondary-active:  #878e92;
+    --btn-secondary-active: #878e92;
     --btn-secondary-checked: #b84cff;
 }
 
@@ -35,9 +35,9 @@ section {
     width: 65%;
 
     text-align: center;
-    background-color: #ddd4c3;
+    background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 5px 5px 10px #606060;
+    box-shadow: 5px 5px 10px #8b8b8b;
     padding: 2rem;
 }
 
@@ -93,11 +93,11 @@ label {
     background-color: var(--btn-primary-active);
 }
 
-.radio-form:checked ~ .btn-primary {
+.radio-form:checked~.btn-primary {
     background-color: var(--btn-primary-checked);
 }
 
-input[type=checkbox]:checked + label {
+input[type=checkbox]:checked+label {
     background-color: var(--btn-primary-active);
 }
 
@@ -106,6 +106,9 @@ select {
     border-radius: 5px;
     box-shadow: 3px 3px #000000;
     background-color: var(--btn-secondary);
+    height: 100%;
+    width: 100%;
+
     text-align: center;
 }
 
@@ -124,34 +127,10 @@ option:hover {
     cursor: pointer;
 }
 
+
 input[type=submit],
-input[type=radio],
-input[type=checkbox] {
+input[type=radio] {
     display: none;
-}
-
-.liczba_mnoga {
-    position: relative;
-}
-
-input#toggle_plural_object[type=checkbox],
-input#toggle_plural_subject[type=checkbox] {
-    display: block;
-    position: absolute;
-    right: 25%;
-    top: 45%;
-}
-
-#noun, #third_person {
-    position: relative;
-}
-
-#noun_dropdown, #person_dropdown {
-    position: absolute;
-    left: 10px;
-    top: 0;
-    width: 95%;
-    height: 100%;
 }
 
 /* ================== Toggle form displays ==================== */
@@ -163,10 +142,10 @@ input#toggle_plural_subject[type=checkbox] {
     display: none;
 }
 
-section#adjective_section #toggle_adj:checked ~ #adjective_form,
-section#pronoun_section #toggle_pro:checked ~ #pronoun_form,
-div#third_person #toggle_person:checked ~ #person_form,
-div#noun #toggle_noun:checked ~ #noun_form {
+section#adjective_section #toggle_adj:checked~#adjective_form,
+section#pronoun_section #toggle_pro:checked~#pronoun_form,
+div#third_person #toggle_person:checked~#person_form,
+div#noun #toggle_noun:checked~#noun_form {
     display: block;
 }
 
@@ -241,4 +220,12 @@ div#noun #toggle_noun:checked ~ #noun_form {
 #output_section {
     /*display: none;*/
     margin-bottom: 50px;
+}
+
+.col-5 {
+    font-size: 2.0rem;
+}
+
+.col-2 {
+    font-size: 1.4rem;
 }
