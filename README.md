@@ -1,5 +1,6 @@
 # Syntactic Constructor of English Sentences
 
+## 🎓 Project Description
 A web-based application designed to programmatically construct grammatically correct English sentences. The tool applies specific linguistic rules to transform base components (subjects, verbs, objects) into full sentences across various tenses.
 
 ## 🔑 Key Features
